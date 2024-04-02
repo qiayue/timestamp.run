@@ -1,5 +1,6 @@
 {
   "routes": [
-    { "src": "/time/(\\d+)", "dest": "/api/time?timestamp=$1" }
+    { "src": "/time/(\\d+)", "dest": "/api/time?timestamp=$1" },
+    { "src": "/", "dest": "/api/index" }
   ]
 }
