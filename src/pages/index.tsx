@@ -1,14 +1,13 @@
-import React from 'react'
-import { Helmet } from 'react-helmet'
-import EnhancedTimestampConverter from '../components/EnhancedTimestampConverter'
+import Head from 'next/head'
+import EnhancedTimestampConverter from '@/components/EnhancedTimestampConverter'
 
-const RealtimeConverter: React.FC = () => {
+export default function Home() {
   return (
     <div className="max-w-4xl mx-auto">
-      <Helmet>
+      <Head>
         <title>Realtime Timestamp Converter | Time Converter</title>
         <meta name="description" content="Convert between current time and Unix timestamp in real-time. Features multiple time zones and live updates." />
-      </Helmet>
+      </Head>
       <h1 className="text-3xl font-bold mb-6">Realtime Timestamp Converter</h1>
       <EnhancedTimestampConverter />
       
@@ -51,5 +50,3 @@ const RealtimeConverter: React.FC = () => {
     </div>
   )
 }
-
-export default RealtimeConverter

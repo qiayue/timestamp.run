@@ -4,10 +4,6 @@ import TimestampToDateConverter from './TimestampToDateConverter'
 import DateToTimestampConverter from './DateToTimestampConverter'
 import DetailedDateToTimestampConverter from './DetailedDateToTimestampConverter'
 
-interface EnhancedTimestampConverterProps {
-  defaultTimeZone: string;
-}
-
 const timeZones = [
   'UTC',
   'America/New_York',
@@ -31,10 +27,10 @@ const timeZones = [
   'Atlantic/Reykjavik'
 ]
 
-const EnhancedTimestampConverter: React.FC<EnhancedTimestampConverterProps> = ({ defaultTimeZone }) => {
+const EnhancedTimestampConverter: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [isRunning, setIsRunning] = useState(true)
-  const [selectedTimeZone, setSelectedTimeZone] = useState(defaultTimeZone)
+  const [selectedTimeZone, setSelectedTimeZone] = useState('UTC')
 
   const updateTime = useCallback(() => {
     setCurrentTime(new Date())
@@ -52,18 +48,17 @@ const EnhancedTimestampConverter: React.FC<EnhancedTimestampConverterProps> = ({
 
   const formatTime = (date: Date): string => {
     const options: Intl.DateTimeFormatOptions = {
+      timeZone: selectedTimeZone,
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
-      hour12: false,
-      timeZone: selectedTimeZone
-    };
-    return date.toLocaleString('en-US', options)
-      .replace(/(\d+)\/(\d+)\/(\d+),/, '$3-$1-$2')
-      .replace(/,/, '');
+      hour12: false
+    }
+    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date)
+    return formattedDate.replace(/(\d+)\/(\d+)\/(\d+),\s/, '$3-$1-$2 ')
   }
 
   const getTimestamp = (date: Date): number => {
@@ -80,7 +75,7 @@ const EnhancedTimestampConverter: React.FC<EnhancedTimestampConverterProps> = ({
 
   return (
     <div className="space-y-4">
-      <div className="text-3xl font-bold text-center">{formatTime(currentTime)}</div>
+      <div className="text-3xl font-bold text-center">{formatTime(currentTime)} ({selectedTimeZone})</div>
       <div className="text-xl text-center">Timestamp: {getTimestamp(currentTime)}</div>
       <div className="flex justify-center space-x-2">
         <button

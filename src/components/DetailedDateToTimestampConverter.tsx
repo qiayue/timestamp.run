@@ -47,6 +47,13 @@ const DetailedDateToTimestampConverter: React.FC = () => {
     setFutureDates(futureDatesList)
   }
 
+  const formatDate = (timestamp: number): string => {
+    const date = new Date(timestamp * 1000)
+    const pad = (num: number) => num.toString().padStart(2, '0')
+    
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`
+  }
+
   return (
     <div className="mt-6 p-4 bg-gray-100 rounded-lg">
       <h3 className="text-lg font-semibold mb-2">Detailed Date to Timestamp Converter</h3>
@@ -115,12 +122,12 @@ const DetailedDateToTimestampConverter: React.FC = () => {
       )}
       {timestamp && (
         <div className="bg-white p-2 rounded mb-2">
-          <strong>Current Timestamp:</strong> {timestamp}
+          <strong>Current Timestamp:</strong> {timestamp} ({formatDate(parseInt(timestamp))})
         </div>
       )}
       {futureDates.map(({ days, timestamp }) => (
         <div key={days} className="bg-white p-2 rounded mb-2">
-          <strong>Timestamp after {days} days:</strong> {timestamp}
+          <strong>Timestamp after {days} days:</strong> {timestamp} ({formatDate(timestamp)})
         </div>
       ))}
     </div>
