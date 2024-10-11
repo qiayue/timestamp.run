@@ -1,5 +1,10 @@
 import Head from 'next/head'
-import EnhancedTimestampConverter from '@/components/EnhancedTimestampConverter'
+import dynamic from 'next/dynamic'
+
+const EnhancedTimestampConverter = dynamic(
+  () => import('../components/EnhancedTimestampConverter'),
+  { ssr: false }
+)
 
 export default function Home() {
   return (

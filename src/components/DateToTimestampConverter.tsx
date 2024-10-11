@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
+import { useTimeZone } from '../contexts/TimeZoneContext'
 
 const DateToTimestampConverter: React.FC = () => {
   const [dateInput, setDateInput] = useState('')
   const [convertedTimestamp, setConvertedTimestamp] = useState('')
   const [error, setError] = useState('')
+  const { timeZone } = useTimeZone()
 
   const validateAndConvertDate = () => {
     setError('')
     setConvertedTimestamp('')
 
-    // Regular expression to match YYYY-MM-DD HH:mm:ss format
     const dateFormatRegex = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/
 
     if (!dateFormatRegex.test(dateInput)) {
@@ -17,15 +18,38 @@ const DateToTimestampConverter: React.FC = () => {
       return
     }
 
-    const date = new Date(dateInput)
+    try {
+      const date = new Date(dateInput)
+      if (isNaN(date.getTime())) {
+        throw new Error('Invalid date')
+      }
 
-    if (isNaN(date.getTime())) {
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      }
+
+      const formatter = new Intl.DateTimeFormat('en-US', options)
+      const parts = formatter.formatToParts(date)
+      const dateObject: { [key: string]: string } = {}
+      parts.forEach(part => {
+        dateObject[part.type] = part.value
+      })
+
+      const convertedDate = new Date(
+        `${dateObject.year}-${dateObject.month}-${dateObject.day}T${dateObject.hour}:${dateObject.minute}:${dateObject.second}`
+      )
+      const timestamp = Math.floor(convertedDate.getTime() / 1000)
+      setConvertedTimestamp(`${timestamp} (UTC) (${formatter.format(convertedDate)} ${timeZone})`)
+    } catch (err) {
       setError('Invalid date. Please enter a valid date and time.')
-      return
     }
-
-    const timestamp = Math.floor(date.getTime() / 1000)
-    setConvertedTimestamp(timestamp.toString())
   }
 
   return (

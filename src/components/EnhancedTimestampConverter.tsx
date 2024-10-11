@@ -3,37 +3,20 @@ import { Play, Pause, RefreshCw, Globe } from 'lucide-react'
 import TimestampToDateConverter from './TimestampToDateConverter'
 import DateToTimestampConverter from './DateToTimestampConverter'
 import DetailedDateToTimestampConverter from './DetailedDateToTimestampConverter'
-
-const timeZones = [
-  'UTC',
-  'America/New_York',
-  'America/Los_Angeles',
-  'America/Chicago',
-  'America/Toronto',
-  'Europe/London',
-  'Europe/Paris',
-  'Europe/Berlin',
-  'Europe/Moscow',
-  'Asia/Tokyo',
-  'Asia/Shanghai',
-  'Asia/Dubai',
-  'Asia/Singapore',
-  'Australia/Sydney',
-  'Australia/Melbourne',
-  'Pacific/Auckland',
-  'Africa/Cairo',
-  'Africa/Johannesburg',
-  'America/Sao_Paulo',
-  'Atlantic/Reykjavik'
-]
+import { useTimeZone } from '../contexts/TimeZoneContext'
+import { timeZones } from '../utils/timeZones'
 
 const EnhancedTimestampConverter: React.FC = () => {
-  const [currentTime, setCurrentTime] = useState(new Date())
-  const [isRunning, setIsRunning] = useState(true)
-  const [selectedTimeZone, setSelectedTimeZone] = useState('UTC')
+  const [currentTime, setCurrentTime] = useState(() => new Date())
+  const [isRunning, setIsRunning] = useState(false)
+  const { timeZone, setTimeZone } = useTimeZone()
 
   const updateTime = useCallback(() => {
     setCurrentTime(new Date())
+  }, [])
+
+  useEffect(() => {
+    setIsRunning(true)
   }, [])
 
   useEffect(() => {
@@ -48,7 +31,7 @@ const EnhancedTimestampConverter: React.FC = () => {
 
   const formatTime = (date: Date): string => {
     const options: Intl.DateTimeFormatOptions = {
-      timeZone: selectedTimeZone,
+      timeZone,
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
@@ -57,8 +40,7 @@ const EnhancedTimestampConverter: React.FC = () => {
       second: '2-digit',
       hour12: false
     }
-    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date)
-    return formattedDate.replace(/(\d+)\/(\d+)\/(\d+),\s/, '$3-$1-$2 ')
+    return new Intl.DateTimeFormat('en-US', options).format(date).replace(/(\d+)\/(\d+)\/(\d+),\s/, '$3-$1-$2 ')
   }
 
   const getTimestamp = (date: Date): number => {
@@ -75,7 +57,7 @@ const EnhancedTimestampConverter: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      <div className="text-3xl font-bold text-center">{formatTime(currentTime)} ({selectedTimeZone})</div>
+      <div className="text-3xl font-bold text-center">{formatTime(currentTime)} ({timeZone})</div>
       <div className="text-xl text-center">Timestamp: {getTimestamp(currentTime)}</div>
       <div className="flex justify-center space-x-2">
         <button
@@ -94,8 +76,8 @@ const EnhancedTimestampConverter: React.FC = () => {
       <div className="flex items-center justify-center space-x-2">
         <Globe size={24} />
         <select
-          value={selectedTimeZone}
-          onChange={(e) => setSelectedTimeZone(e.target.value)}
+          value={timeZone}
+          onChange={(e) => setTimeZone(e.target.value)}
           className="p-2 border border-gray-300 rounded"
         >
           {timeZones.map((zone) => (

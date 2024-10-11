@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { useTimeZone } from '../contexts/TimeZoneContext'
 
 const DetailedDateToTimestampConverter: React.FC = () => {
+  const { timeZone } = useTimeZone()
   const [year, setYear] = useState(new Date().getFullYear().toString())
   const [month, setMonth] = useState('')
   const [day, setDay] = useState('')
@@ -49,9 +51,17 @@ const DetailedDateToTimestampConverter: React.FC = () => {
 
   const formatDate = (timestamp: number): string => {
     const date = new Date(timestamp * 1000)
-    const pad = (num: number) => num.toString().padStart(2, '0')
-    
-    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`
+    const options: Intl.DateTimeFormatOptions = {
+      timeZone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    }
+    return `${new Intl.DateTimeFormat('en-US', options).format(date).replace(/(\d+)\/(\d+)\/(\d+),\s/, '$3-$1-$2 ')} (${timeZone})`
   }
 
   return (
