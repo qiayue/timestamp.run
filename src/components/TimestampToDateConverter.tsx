@@ -10,11 +10,11 @@ const TimestampToDateConverter: React.FC = () => {
   const convertTimestamp = () => {
     const inputTimestamp = parseInt(timestamp.trim())
     if (isNaN(inputTimestamp)) {
-      setConvertedDates({ error: '无效的时间戳' })
+      setConvertedDates({ error: 'Invalid timestamp' })
       return
     }
 
-    const date = new Date(inputTimestamp * 1000) // 将秒转换为毫秒
+    const date = new Date(inputTimestamp * 1000) // Convert seconds to milliseconds
     const formattedDates = timeZones.reduce((acc, zone) => {
       acc[zone] = formatDate(date, zone)
       return acc
@@ -38,27 +38,35 @@ const TimestampToDateConverter: React.FC = () => {
 
   return (
     <div className="mt-6 p-4 bg-gray-100 rounded-lg">
-      <h3 className="text-lg font-semibold mb-2">时间戳转日期转换器</h3>
+      <h3 className="text-lg font-semibold mb-2">Timestamp to Date Converter</h3>
       <input
         type="text"
         value={timestamp}
         onChange={(e) => setTimestamp(e.target.value)}
-        placeholder="输入 Unix 时间戳"
+        placeholder="Enter Unix timestamp"
         className="w-full p-2 border border-gray-300 rounded mb-2"
       />
       <button
         onClick={convertTimestamp}
         className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors mb-2"
       >
-        转换为日期
+        Convert to Date
       </button>
       {Object.keys(convertedDates).length > 0 && (
-        <div className="bg-white p-2 rounded">
-          <strong>转换后的日期：</strong>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-2">
+        <div className="bg-white p-4 rounded shadow-md">
+          <h4 className="text-lg font-semibold mb-3">转换结果：</h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {Object.entries(convertedDates).map(([zone, date]) => (
-              <div key={zone} className={`p-2 ${zone === timeZone ? 'bg-blue-100' : ''}`}>
-                <span className="font-semibold">{zone}:</span> {date}
+              <div 
+                key={zone} 
+                className={`p-3 rounded-lg transition-colors ${
+                  zone === timeZone 
+                    ? 'bg-blue-100 border-2 border-blue-300' 
+                    : 'bg-gray-50 hover:bg-gray-100'
+                }`}
+              >
+                <div className="font-semibold text-gray-700 mb-1">{zone}</div>
+                <div className="text-sm text-gray-600">{date}</div>
               </div>
             ))}
           </div>
