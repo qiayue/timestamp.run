@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useTimeZone } from '../contexts/TimeZoneContext'
 
 const DetailedDateToTimestampConverter: React.FC = () => {
+  // 使用上下文获取时区
   const { timeZone } = useTimeZone()
+  
+  // 使用状态钩子管理表单输入和结果
   const [year, setYear] = useState(new Date().getFullYear().toString())
   const [month, setMonth] = useState('')
   const [day, setDay] = useState('')
@@ -13,10 +16,12 @@ const DetailedDateToTimestampConverter: React.FC = () => {
   const [futureDates, setFutureDates] = useState<{ days: number; timestamp: number }[]>([])
   const [error, setError] = useState('')
 
+  // 组件加载时设置年份为当前年
   useEffect(() => {
     setYear(new Date().getFullYear().toString())
   }, [])
 
+  // 将输入的日期转换为时间戳
   const convertToTimestamp = () => {
     setError('')
     setTimestamp('')
@@ -50,9 +55,11 @@ const DetailedDateToTimestampConverter: React.FC = () => {
     const dateString = new Intl.DateTimeFormat('en-US', options).format(inputDate)
     const zonedDate = new Date(dateString)
 
+    // 计算当前时间戳和未来日期的时间戳
     const currentTimestamp = Math.floor(zonedDate.getTime() / 1000)
     setTimestamp(currentTimestamp.toString())
 
+    // 计算未来100天、200天和365天的时间戳
     const futureDatesList = [100, 200, 365].map(days => {
       const futureDate = new Date(zonedDate.getTime() + days * 24 * 60 * 60 * 1000)
       return {
@@ -63,6 +70,7 @@ const DetailedDateToTimestampConverter: React.FC = () => {
     setFutureDates(futureDatesList)
   }
 
+  // 格式化日期显示
   const formatDate = (timestamp: number): string => {
     const date = new Date(timestamp * 1000)
     const options: Intl.DateTimeFormatOptions = {
@@ -81,8 +89,12 @@ const DetailedDateToTimestampConverter: React.FC = () => {
   return (
     <div className="mt-6 p-4 bg-gray-100 rounded-lg">
       <h3 className="text-lg font-semibold mb-2">Detailed Date to Timestamp Converter</h3>
-      <div className="mb-2 text-sm text-gray-600">Time Zone: {timeZone}</div>
+      {/* 显示当前时区 */}
+      <div className="mb-2 text-sm text-gray-600">{timeZone}</div>
+      
+      {/* 日期输入表单 */}
       <div className="grid grid-cols-3 gap-2 mb-2">
+        {/* 年、月、日、时、分、秒输入框 */}
         <div className="flex items-center">
           <span className="mr-2 text-sm">Year:</span>
           <input
@@ -154,20 +166,28 @@ const DetailedDateToTimestampConverter: React.FC = () => {
           />
         </div>
       </div>
+
+      {/* 转换按钮 */}
       <button
         onClick={convertToTimestamp}
         className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors mb-2"
       >
         Convert to Timestamp
       </button>
+
+      {/* 显示错误信息 */}
       {error && (
         <div className="text-red-500 mb-2">{error}</div>
       )}
+
+      {/* 显示当前时间戳 */}
       {timestamp && (
         <div className="bg-white p-2 rounded mb-2">
           <strong>Current Timestamp:</strong> {timestamp} ({formatDate(parseInt(timestamp))})
         </div>
       )}
+
+      {/* 显示未来日期的时间戳 */}
       {futureDates.map(({ days, timestamp }) => (
         <div key={days} className="bg-white p-2 rounded mb-2">
           <strong>Timestamp after {days} days:</strong> {timestamp} ({formatDate(timestamp)})

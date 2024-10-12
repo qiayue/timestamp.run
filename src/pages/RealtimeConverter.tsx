@@ -6,10 +6,13 @@ const RealtimeConverter: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto">
       <Helmet>
-        <title>Realtime Timestamp Converter | Time Converter</title>
-        <meta name="description" content="Convert between current time and Unix timestamp in real-time. Features multiple time zones and live updates." />
+        <title>Unix timestamp to date converter free online</title>
+        <meta name="description" content="Epoch and unix timestamp converter free. Date and time function timestamp for various programming languages. Use it now." />
       </Helmet>
-      <h1 className="text-3xl font-bold mb-6">Realtime Timestamp Converter</h1>
+      <h1 className="text-3xl font-bold mb-6">Unix timestamp to date and datetime to timestamp Converter</h1>
+      
+      <h2 className="text-2xl font-semibold mb-4">Free unix timestamp and epoch time to date tool. Supports Epoch unix time in seconds and minutes.</h2>
+      
       <EnhancedTimestampConverter />
       
       <section className="mt-12">

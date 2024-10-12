@@ -54,7 +54,7 @@ const TimestampToDateConverter: React.FC = () => {
       </button>
       {Object.keys(convertedDates).length > 0 && (
         <div className="bg-white p-4 rounded shadow-md">
-          <h4 className="text-lg font-semibold mb-3">转换结果：</h4>
+          <h4 className="text-lg font-semibold mb-3">Conversion Results:</h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {Object.entries(convertedDates).map(([zone, date]) => (
               <div 

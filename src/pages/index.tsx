@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="max-w-4xl mx-auto">
       <Head>
-        <title>Realtime Timestamp Converter | Time Converter</title>
+        <title>Realtime Timestamp Converter | Timestamp.run</title>
         <meta name="description" content="Convert between current time and Unix timestamp in real-time. Features multiple time zones and live updates." />
       </Head>
       <h1 className="text-3xl font-bold mb-6">Realtime Timestamp Converter</h1>

@@ -55,14 +55,16 @@ const DateToTimestampConverter: React.FC = () => {
   return (
     <div className="mt-6 p-4 bg-gray-100 rounded-lg">
       <h3 className="text-lg font-semibold mb-2">Date to Timestamp Converter</h3>
-      <div className="mb-2 text-sm text-gray-600">Time Zone: {timeZone}</div>
-      <div className="flex items-center mb-2">
+      <div className="flex items-center mb-2 border border-gray-300 rounded overflow-hidden">
+        <div className="bg-gray-200 p-2 text-sm text-gray-600 border-r border-gray-300">
+          {timeZone}
+        </div>
         <input
           type="text"
           value={dateInput}
           onChange={(e) => setDateInput(e.target.value)}
           placeholder="Enter date (YYYY-MM-DD HH:mm:ss)"
-          className="flex-grow p-2 border border-gray-300 rounded"
+          className="flex-grow p-2"
         />
       </div>
       <button

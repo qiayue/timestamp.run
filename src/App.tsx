@@ -17,7 +17,7 @@ function App() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <Clock className="h-6 w-6 text-blue-500 mr-2" />
-                  <span className="text-xl font-semibold">Time Converter</span>
+                  <span className="text-xl font-semibold">Timestamp.run</span>
                 </div>
                 <div className="flex space-x-4">
                   <Link to="/" className="text-gray-700 hover:text-blue-500">Realtime</Link>

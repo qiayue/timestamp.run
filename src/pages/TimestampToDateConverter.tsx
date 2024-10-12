@@ -6,7 +6,7 @@ const TimestampToDateConverter: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto">
       <Helmet>
-        <title>Timestamp to Date Converter | Time Converter</title>
+        <title>Timestamp to Date Converter | Timestamp.run</title>
         <meta name="description" content="Convert Unix timestamps to human-readable dates. Easy-to-use tool for developers and time management." />
       </Helmet>
       <h1 className="text-3xl font-bold mb-6">Timestamp to Date Converter</h1>

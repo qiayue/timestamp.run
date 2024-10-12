@@ -5,7 +5,7 @@ export default function DateToTimestampConverter() {
   return (
     <div className="max-w-4xl mx-auto">
       <Head>
-        <title>Date to Timestamp Converter | Time Converter</title>
+        <title>Date to Timestamp Converter | Timestamp.run</title>
         <meta name="description" content="Convert dates to Unix timestamps. Perfect for developers working with time-based data and calculations." />
       </Head>
       <h1 className="text-3xl font-bold mb-6">Date to Timestamp Converter</h1>
