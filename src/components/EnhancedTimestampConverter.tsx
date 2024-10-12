@@ -9,7 +9,7 @@ import { timeZones } from '../utils/timeZones'
 const EnhancedTimestampConverter: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(() => new Date())
   const [isRunning, setIsRunning] = useState(false)
-  const { timeZone, setTimeZone } = useTimeZone()
+  const { timeZone } = useTimeZone()
 
   const updateTime = useCallback(() => {
     setCurrentTime(new Date())
@@ -72,20 +72,6 @@ const EnhancedTimestampConverter: React.FC = () => {
         >
           <RefreshCw size={24} />
         </button>
-      </div>
-      <div className="flex items-center justify-center space-x-2">
-        <Globe size={24} />
-        <select
-          value={timeZone}
-          onChange={(e) => setTimeZone(e.target.value)}
-          className="p-2 border border-gray-300 rounded"
-        >
-          {timeZones.map((zone) => (
-            <option key={zone} value={zone}>
-              {zone.replace('_', ' ')}
-            </option>
-          ))}
-        </select>
       </div>
       <TimestampToDateConverter />
       <DateToTimestampConverter />
