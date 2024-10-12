@@ -22,7 +22,7 @@ const DetailedDateToTimestampConverter: React.FC = () => {
     setTimestamp('')
     setFutureDates([])
 
-    const date = new Date(
+    const inputDate = new Date(
       parseInt(year),
       parseInt(month) - 1,
       parseInt(day),
@@ -31,16 +31,30 @@ const DetailedDateToTimestampConverter: React.FC = () => {
       parseInt(second) || 0
     )
 
-    if (isNaN(date.getTime())) {
-      setError('Invalid date. Please check your inputs.')
+    if (isNaN(inputDate.getTime())) {
+      setError('Invalid date. Please check your input.')
       return
     }
 
-    const currentTimestamp = Math.floor(date.getTime() / 1000)
+    // 创建一个带有时区的日期对象
+    const options: Intl.DateTimeFormatOptions = {
+      timeZone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    }
+    const dateString = new Intl.DateTimeFormat('en-US', options).format(inputDate)
+    const zonedDate = new Date(dateString)
+
+    const currentTimestamp = Math.floor(zonedDate.getTime() / 1000)
     setTimestamp(currentTimestamp.toString())
 
     const futureDatesList = [100, 200, 365].map(days => {
-      const futureDate = new Date(date.getTime() + days * 24 * 60 * 60 * 1000)
+      const futureDate = new Date(zonedDate.getTime() + days * 24 * 60 * 60 * 1000)
       return {
         days,
         timestamp: Math.floor(futureDate.getTime() / 1000)
@@ -67,59 +81,78 @@ const DetailedDateToTimestampConverter: React.FC = () => {
   return (
     <div className="mt-6 p-4 bg-gray-100 rounded-lg">
       <h3 className="text-lg font-semibold mb-2">Detailed Date to Timestamp Converter</h3>
+      <div className="mb-2 text-sm text-gray-600">Time Zone: {timeZone}</div>
       <div className="grid grid-cols-3 gap-2 mb-2">
-        <input
-          type="number"
-          value={year}
-          onChange={(e) => setYear(e.target.value)}
-          placeholder="Year"
-          className="p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          value={month}
-          onChange={(e) => setMonth(e.target.value)}
-          placeholder="Month"
-          min="1"
-          max="12"
-          className="p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          value={day}
-          onChange={(e) => setDay(e.target.value)}
-          placeholder="Day"
-          min="1"
-          max="31"
-          className="p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          value={hour}
-          onChange={(e) => setHour(e.target.value)}
-          placeholder="Hour"
-          min="0"
-          max="23"
-          className="p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          value={minute}
-          onChange={(e) => setMinute(e.target.value)}
-          placeholder="Minute"
-          min="0"
-          max="59"
-          className="p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          value={second}
-          onChange={(e) => setSecond(e.target.value)}
-          placeholder="Second"
-          min="0"
-          max="59"
-          className="p-2 border border-gray-300 rounded"
-        />
+        <div className="flex items-center">
+          <span className="mr-2 text-sm">Year:</span>
+          <input
+            type="number"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+            placeholder="Year"
+            className="p-2 border border-gray-300 rounded flex-grow"
+          />
+        </div>
+        <div className="flex items-center">
+          <span className="mr-2 text-sm">Month:</span>
+          <input
+            type="number"
+            value={month}
+            onChange={(e) => setMonth(e.target.value)}
+            placeholder="Month"
+            min="1"
+            max="12"
+            className="p-2 border border-gray-300 rounded flex-grow"
+          />
+        </div>
+        <div className="flex items-center">
+          <span className="mr-2 text-sm">Day:</span>
+          <input
+            type="number"
+            value={day}
+            onChange={(e) => setDay(e.target.value)}
+            placeholder="Day"
+            min="1"
+            max="31"
+            className="p-2 border border-gray-300 rounded flex-grow"
+          />
+        </div>
+        <div className="flex items-center">
+          <span className="mr-2 text-sm">Hour:</span>
+          <input
+            type="number"
+            value={hour}
+            onChange={(e) => setHour(e.target.value)}
+            placeholder="Hour"
+            min="0"
+            max="23"
+            className="p-2 border border-gray-300 rounded flex-grow"
+          />
+        </div>
+        <div className="flex items-center">
+          <span className="mr-2 text-sm">Minute:</span>
+          <input
+            type="number"
+            value={minute}
+            onChange={(e) => setMinute(e.target.value)}
+            placeholder="Minute"
+            min="0"
+            max="59"
+            className="p-2 border border-gray-300 rounded flex-grow"
+          />
+        </div>
+        <div className="flex items-center">
+          <span className="mr-2 text-sm">Second:</span>
+          <input
+            type="number"
+            value={second}
+            onChange={(e) => setSecond(e.target.value)}
+            placeholder="Second"
+            min="0"
+            max="59"
+            className="p-2 border border-gray-300 rounded flex-grow"
+          />
+        </div>
       </div>
       <button
         onClick={convertToTimestamp}

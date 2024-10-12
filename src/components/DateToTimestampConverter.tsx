@@ -46,7 +46,7 @@ const DateToTimestampConverter: React.FC = () => {
         `${dateObject.year}-${dateObject.month}-${dateObject.day}T${dateObject.hour}:${dateObject.minute}:${dateObject.second}`
       )
       const timestamp = Math.floor(convertedDate.getTime() / 1000)
-      setConvertedTimestamp(`${timestamp} (UTC) (${formatter.format(convertedDate)} ${timeZone})`)
+      setConvertedTimestamp(`${timestamp}`)
     } catch (err) {
       setError('Invalid date. Please enter a valid date and time.')
     }
@@ -55,13 +55,16 @@ const DateToTimestampConverter: React.FC = () => {
   return (
     <div className="mt-6 p-4 bg-gray-100 rounded-lg">
       <h3 className="text-lg font-semibold mb-2">Date to Timestamp Converter</h3>
-      <input
-        type="text"
-        value={dateInput}
-        onChange={(e) => setDateInput(e.target.value)}
-        placeholder="Enter date (YYYY-MM-DD HH:mm:ss)"
-        className="w-full p-2 border border-gray-300 rounded mb-2"
-      />
+      <div className="mb-2 text-sm text-gray-600">Time Zone: {timeZone}</div>
+      <div className="flex items-center mb-2">
+        <input
+          type="text"
+          value={dateInput}
+          onChange={(e) => setDateInput(e.target.value)}
+          placeholder="Enter date (YYYY-MM-DD HH:mm:ss)"
+          className="flex-grow p-2 border border-gray-300 rounded"
+        />
+      </div>
       <button
         onClick={validateAndConvertDate}
         className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors mb-2"
