@@ -4,24 +4,38 @@ import Link from 'next/link'
 import { Clock, Globe } from 'lucide-react'
 import { TimeZoneProvider, useTimeZone } from '../contexts/TimeZoneContext'
 import { timeZones } from '../utils/timeZones'
+import React, { useEffect } from 'react'
 
 function NavBar() {
   const { timeZone, setTimeZone } = useTimeZone()
+
+  useEffect(() => {
+    const savedTimeZone = localStorage.getItem('selectedTimeZone')
+    if (savedTimeZone) {
+      setTimeZone(savedTimeZone)
+    }
+  }, [setTimeZone])
+
+  const handleTimeZoneChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newTimeZone = e.target.value
+    setTimeZone(newTimeZone)
+    localStorage.setItem('selectedTimeZone', newTimeZone)
+  }
 
   return (
     <nav className="bg-white shadow-md">
       <div className="container mx-auto px-6 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <Clock className="h-6 w-6 text-blue-500 mr-2" />
-            <span className="text-xl font-semibold">Time Converter</span>
+            <img src="/icon/favicon-32x32.png" alt="Timestamp.run icon" className="h-6 w-6 mr-2" />
+            <span className="text-xl font-semibold">Timestamp.run</span>
           </div>
           <div className="flex items-center space-x-4">
             <div className="flex items-center">
               <Globe size={20} className="text-gray-500 mr-2" />
               <select
                 value={timeZone}
-                onChange={(e) => setTimeZone(e.target.value)}
+                onChange={handleTimeZoneChange}
                 className="p-2 border border-gray-300 rounded"
               >
                 {timeZones.map((zone) => (
