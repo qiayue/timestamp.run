@@ -1,20 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTimeZone } from '../contexts/TimeZoneContext'
 import { timeZones } from '../utils/timeZones'
 
-const TimestampToDateConverter: React.FC = () => {
-  const [timestamp, setTimestamp] = useState('')
-  const [convertedDates, setConvertedDates] = useState<{ [key: string]: string }>({})
+interface TimestampToDateConverterProps {
+  initialTimestamp?: string
+  initialConvertedDates?: { [key: string]: string }
+}
+
+const TimestampToDateConverter: React.FC<TimestampToDateConverterProps> = ({
+  initialTimestamp = '',
+  initialConvertedDates = {}
+}) => {
+  const [timestamp, setTimestamp] = useState(initialTimestamp)
+  const [convertedDates, setConvertedDates] = useState<{ [key: string]: string }>(initialConvertedDates)
   const { timeZone } = useTimeZone()
 
-  const convertTimestamp = () => {
-    const inputTimestamp = parseInt(timestamp.trim())
-    if (isNaN(inputTimestamp)) {
+  useEffect(() => {
+    if (timestamp) {
+      convertTimestamp(timestamp)
+    }
+  }, [timeZone, timestamp])
+
+  const convertTimestamp = (inputTimestamp: string) => {
+    const parsedTimestamp = parseInt(inputTimestamp.trim())
+    if (isNaN(parsedTimestamp)) {
       setConvertedDates({ error: 'Invalid timestamp' })
       return
     }
 
-    const date = new Date(inputTimestamp * 1000) // Convert seconds to milliseconds
+    const date = new Date(parsedTimestamp * 1000)
     const formattedDates = timeZones.reduce((acc, zone) => {
       acc[zone] = formatDate(date, zone)
       return acc
@@ -38,7 +52,7 @@ const TimestampToDateConverter: React.FC = () => {
 
   return (
     <div className="mt-6 p-4 bg-gray-100 rounded-lg">
-      <h3 className="text-lg font-semibold mb-2">Timestamp to Date Converter</h3>
+      <h2 className="text-lg font-semibold mb-2">Convert Epoch time to date vice versa</h2>
       <input
         type="text"
         value={timestamp}
@@ -47,7 +61,7 @@ const TimestampToDateConverter: React.FC = () => {
         className="w-full p-2 border border-gray-300 rounded mb-2"
       />
       <button
-        onClick={convertTimestamp}
+        onClick={() => convertTimestamp(timestamp)}
         className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors mb-2"
       >
         Convert to Date

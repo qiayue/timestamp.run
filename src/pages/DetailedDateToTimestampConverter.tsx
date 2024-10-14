@@ -49,6 +49,7 @@ const DetailedDateToTimestampConverter: React.FC = () => {
           </div>
         </div>
       </section>
+      <script defer data-domain="timestamp.run" src="https://click.pageview.click/js/script.js"></script>
     </div>
   )
 }

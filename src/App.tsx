@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import { Clock } from 'lucide-react'
-import RealtimeConverter from './pages/RealtimeConverter'
+import RealtimeConverter from './components/RealtimeConverter'
 import TimestampToDateConverter from './pages/TimestampToDateConverter'
 import DateToTimestampConverter from './pages/DateToTimestampConverter'
 import DetailedDateToTimestampConverter from './pages/DetailedDateToTimestampConverter'

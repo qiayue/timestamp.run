@@ -46,8 +46,18 @@ export default function DetailedDateToTimestampConverter() {
             <h3 className="font-semibold">Can I leave some fields blank?</h3>
             <p>Yes, if you leave hour, minute, or second fields blank, they will default to 0. However, year, month, and day are required for accurate conversion.</p>
           </div>
+          <div>
+            <h3 className="font-semibold">What time zone is used for the conversion?</h3>
+            <p>All inputs are treated as UTC (Coordinated Universal Time) for consistent and accurate conversions across different time zones.</p>
+          </div>
         </div>
       </section>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  return {
+    props: {}, // 将会被传递给页面组件作为属性
+  }
 }

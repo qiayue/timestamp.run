@@ -47,6 +47,13 @@ export default function TimestampToDateConverter() {
           </div>
         </div>
       </section>
+      <script defer data-domain="timestamp.run" src="https://click.pageview.click/js/script.js"></script>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  return {
+    props: {}, // 将会被传递给页面组件作为属性
+  }
 }
