@@ -1,8 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
-import { FaRegClock, FaCalendarAlt, FaExchangeAlt, FaInfoCircle, FaLightbulb, FaHistory, FaQuestionCircle } from 'react-icons/fa'
+import { FaRegClock, FaCalendarAlt, FaExchangeAlt, FaInfoCircle, FaLightbulb, FaHistory, FaQuestionCircle, FaChevronDown, FaChevronUp } from 'react-icons/fa'
 
 const RealtimeConverter: React.FC = () => {
+  const [openQuestions, setOpenQuestions] = useState<number[]>([])
+
+  const toggleQuestion = (index: number) => {
+    setOpenQuestions(prev =>
+      prev.includes(index)
+        ? prev.filter(i => i !== index)
+        : [...prev, index]
+    )
+  }
+
+  const faqData = [
+    {
+      question: "What is \"Timestamp\"?",
+      answer: "The term \"timestamp\" derives from rubber stamps used in offices to stamp the current date, and sometimes time, in ink on paper documents, to record when the document was received. Common examples of this type of timestamp are a postmark on a letter or the \"in\" and \"out\" times on a time card."
+    },
+    {
+      question: "What is \"Unix Timestamp\"?",
+      answer: "Unix time is a date and time representation widely used in computing. It measures time by the number of non-leap seconds that have elapsed since 00:00:00 UTC on 1 January 1970, Epoch time. In modern computing, values are sometimes stored with higher granularity, such as microseconds or nanoseconds."
+    },
+    {
+      question: "What's the difference between Epoch Timestamp and Unix time?",
+      answer: "The terms Epoch Timestamp and Unix time are often used interchangeably, but there are some subtle differences: The Epoch Timestamp is a broader concept that can refer to any point in time chosen as the origin for a particular era. While it often refers to the same Unix epoch, it can technically be based on other starting points. Both Unix time and Epoch Timestamp are forms of timestamp representation. They can be converted to human-readable date time stamp formats using various tools and functions."
+    },
+    {
+      question: "What's \"Unix Time\"?",
+      answer: "Unix time, also known as POSIX timestamp, is the number of seconds that have elapsed since Epoch time (January 1, 1970, at 00:00:00 UTC). It's widely used in computer systems and programming. Remember, whether you're working with Unix time or Epoch Timestamp, they provide a standardized way of representing time across different systems and time zones."
+    },
+    {
+      question: "Which Timestamps Should You Use?",
+      answer: "Stored as 32- or 64-bit signed integers, POSIX timestamps have a limitation: they'll reach their maximum value on January 19, 2038, leading to an overflow issue."
+    },
+    {
+      question: "Why Unix timestamp is needed?",
+      answer: "Prefixing your Commands or Scripts with a Timestamp. Timestamp when function in script runs is needed. You can create a function that takes care of the timestamp and Change sheet name and range to suit, then call this function from your script function."
+    }
+  ]
+
   return (
     <div className="max-w-4xl mx-auto">
       <Helmet>
@@ -120,44 +157,28 @@ const RealtimeConverter: React.FC = () => {
               <FaQuestionCircle className="text-4xl mr-3 text-blue-500" />
               <h2 className="text-3xl font-bold">FAQs about Timestamp.run</h2>
             </div>
-            <ol className="list-none space-y-4">
-              <li className="flex">
-                <div>
-                  <h3 className="inline">What is "Timestamp"?</h3>
-                  <p>The term "timestamp" derives from rubber stamps used in offices to stamp the current date, and sometimes time, in ink on paper documents, to record when the document was received. Common examples of this type of timestamp are a postmark on a letter or the "in" and "out" times on a time card.</p>
+            <div className="space-y-4">
+              {faqData.map((item, index) => (
+                <div key={index} className="border border-gray-200 rounded-lg">
+                  <button
+                    className="w-full text-left p-4 flex justify-between items-center focus:outline-none"
+                    onClick={() => toggleQuestion(index)}
+                  >
+                    <h3 className="text-xl font-semibold">{item.question}</h3>
+                    {openQuestions.includes(index) ? (
+                      <FaChevronUp className="text-blue-500" />
+                    ) : (
+                      <FaChevronDown className="text-blue-500" />
+                    )}
+                  </button>
+                  {openQuestions.includes(index) && (
+                    <div className="p-4 bg-gray-50">
+                      <p className="text-gray-600">{item.answer}</p>
+                    </div>
+                  )}
                 </div>
-              </li>
-              <li className="flex">
-                <div>
-                  <h3 className="inline">What is "Unix Timestamp"?</h3>
-                  <p>Unix time is a date and time representation widely used in computing. It measures time by the number of non-leap seconds that have elapsed since 00:00:00 UTC on 1 January 1970, Epoch time. In modern computing, values are sometimes stored with higher granularity, such as microseconds or nanoseconds.</p>
-                </div>
-              </li>
-              <li className="flex">
-                <div>
-                  <h3 className="inline">What's the difference between Epoch Timestamp and Unix time?</h3>
-                  <p>The terms Epoch Timestamp and Unix time are often used interchangeably, but there are some subtle differences: The Epoch Timestamp is a broader concept that can refer to any point in time chosen as the origin for a particular era. While it often refers to the same Unix epoch, it can technically be based on other starting points. Both Unix time and Epoch Timestamp are forms of timestamp representation. They can be converted to human-readable date time stamp formats using various tools and functions.</p>
-                </div>
-              </li>
-              <li className="flex">
-                <div>
-                  <h3 className="inline">What's "Unix Time"?</h3>
-                  <p>Unix time, also known as POSIX timestamp, is the number of seconds that have elapsed since Epoch time (January 1, 1970, at 00:00:00 UTC). It's widely used in computer systems and programming. Remember, whether you're working with Unix time or Epoch Timestamp, they provide a standardized way of representing time across different systems and time zones.</p>
-                </div>
-              </li>
-              <li className="flex">
-                <div>
-                  <h3 className="inline">Which Timestamps Should You Use?</h3>
-                  <p>Stored as 32- or 64-bit signed integers, POSIX timestamps have a limitation: they'll reach their maximum value on January 19, 2038, leading to an overflow issue.</p>
-                </div>
-              </li>
-              <li className="flex">
-                <div>
-                  <h3 className="inline">Why Unix timestamp is needed?</h3>
-                  <p>Prefixing your Commands or Scripts with a Timestamp. Timestamp when function in script runs is needed. You can create a function that takes care of the timestamp and Change sheet name and range to suit, then call this function from your script function.</p>
-                </div>
-              </li>
-            </ol>
+              ))}
+            </div>
           </section>
 
           <section className="mt-12 text-center py-10 bg-blue-100 rounded-lg">

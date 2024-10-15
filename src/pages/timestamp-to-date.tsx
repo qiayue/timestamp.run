@@ -7,6 +7,7 @@ export default function TimestampToDateConverter() {
       <Head>
         <title>Timestamp to Date Converter | Timestamp.run</title>
         <meta name="description" content="Convert Unix timestamps to human-readable dates. Easy-to-use tool for developers and time management." />
+        <link rel="canonical" href="https://timestamp.run/timestamp-to-date" />
       </Head>
       <h1 className="text-3xl font-bold mb-6">Timestamp to Date Converter</h1>
       <TimestampToDateConverterComponent />
