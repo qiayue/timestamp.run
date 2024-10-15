@@ -48,7 +48,7 @@ const DetailedDateToTimestampConverter: React.FC = () => {
 
   return (
     <div className="mt-6 p-4 bg-gray-100 rounded-lg">
-      <h3 className="text-lg font-semibold mb-2">Unix timestamp and epoch to date</h3>
+      <h3 className="text-2xl font-semibold mb-2">Unix timestamp and epoch to date</h3>
       <div className="grid grid-cols-3 gap-2 mb-2">
         <input
           type="number"

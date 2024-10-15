@@ -23,7 +23,7 @@ const DateToTimestampConverter: React.FC = () => {
 
   return (
     <div className="mt-6 p-4 bg-gray-100 rounded-lg">
-      <h3 className="text-lg font-semibold mb-2">Convert Epoch time to date vice versa</h3>
+      <h2 className="text-2xl font-semibold mb-2">datetime to timestamp</h2>
       <div className="flex items-center mb-2 border border-gray-300 rounded overflow-hidden">
         <div className="bg-gray-200 p-2 text-sm text-gray-600 border-r border-gray-300">
           {timeZone}

@@ -48,14 +48,34 @@ const LiveTimestampDisplay: React.FC = () => {
     updateTime()
   }
 
+  const formatUTCTime = (date: Date): string => {
+    const options: Intl.DateTimeFormatOptions = {
+      timeZone: 'UTC',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    }
+    return new Intl.DateTimeFormat('en-US', options).format(date)
+  }
+
   if (!currentTime) {
     return null
   }
 
   return (
-    <div className="space-y-4">
-      <div className="text-3xl font-bold text-center">{formatTime(currentTime)} ({timeZone})</div>
-      <div className="text-xl text-center">Timestamp: {getTimestamp(currentTime)}</div>
+    <div className="space-y-4 bg-blue-100 p-6 rounded-lg shadow-md">
+      <div className="text-xl font-bold text-center">
+        <span className="text-sm font-normal block mb-1">Current Unix Timestamp:</span>
+        {getTimestamp(currentTime)}
+      </div>
+      <div className="text-xl font-bold text-center">
+        <span className="text-sm font-normal block mb-1">Current Time ({timeZone}):</span>
+        {formatTime(currentTime)}
+      </div>
       <div className="flex justify-center space-x-2">
         <button
           onClick={handlePauseResume}

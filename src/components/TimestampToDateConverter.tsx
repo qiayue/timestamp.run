@@ -52,7 +52,7 @@ const TimestampToDateConverter: React.FC<TimestampToDateConverterProps> = ({
 
   return (
     <div className="mt-6 p-4 bg-gray-100 rounded-lg">
-      <h2 className="text-lg font-semibold mb-2">Convert Epoch time to date vice versa</h2>
+      <h2 className="text-2xl font-semibold mb-2">Convert Epoch time to date</h2>
       <input
         type="text"
         value={timestamp}

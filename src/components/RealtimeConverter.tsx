@@ -25,6 +25,32 @@ const RealtimeConverter: React.FC = () => {
         </p>
       </section>
 
+      <section className="mt-12 mb-12">
+        <h2 className="text-3xl font-bold mb-6 text-center">Timestamp.run Key Features</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-blue-100 p-6 rounded-lg">
+            <h3 className="text-xl font-semibold mb-3">Epoch time converter to date</h3>
+            <p>Timestamp.run provides a popup showing a human readable date of a highlighted Unix timestamp. Timestamp converts Unix timestamps to human readable date and time strings. Simply double click or highlight a timestamp in your browser window, and a small popup will appear containing a readable date and time.</p>
+          </div>
+          
+          <div className="bg-blue-100 p-6 rounded-lg">
+            <h3 className="text-xl font-semibold mb-3">Timestamp to unix time tool</h3>
+            <p>Unix time originated as the system time of Unix operating systems. It has come to be widely used in other computer operating systems, file systems, programming languages, and databases. Tools like epochconverter or functions in programming languages can perform timestamp to unix time, unix timestamp to date, unix timestamp to datetime, and time to unix timestamp conversions.</p>
+          </div>
+          
+          <div className="bg-blue-100 p-6 rounded-lg">
+            <h3 className="text-xl font-semibold mb-3">Current timestamp to date Conversion</h3>
+            <p>It's simply the time expressed as the number of seconds that have passed since January 1, 1970. That zero moment, known as the epoch, is simply the start of the decade in which the Unix operating system (which first used this time representation) was invented. People often are conflating temporal units in their use of Epoch timestamps.</p>
+          </div>
+          
+          <div className="bg-blue-100 p-6 rounded-lg">
+            <h3 className="text-xl font-semibold mb-3">Date to timestamp generator</h3>
+            <p>Calling an API, people need to specify time in milliseconds using DateTime in Python 3 to convert from and to human readable dates and times. GPS includes leap seconds, Unix just doesn't update timestamp on leap seconds. When debugging, people get different results depending on what website they use to convert, so people will have a hard time when the timestamps are wrong.</p>
+          </div>
+        </div>
+      </section>
+
       <section className="mt-12">
         <h2 className="text-2xl font-bold mb-6">Introduction</h2>
         <div className="space-y-6">
@@ -57,7 +83,7 @@ const RealtimeConverter: React.FC = () => {
               <FaInfoCircle className="text-2xl mr-3 text-blue-500" />
               <h3 className="text-xl font-semibold">Key points of Timestamp.run</h3>
             </div>
-            <p>The Unix Epoch is the starting point created as a universal reference. All Unix Timestamps, sometimes also referred to as Unix time or POSIX time, are an integer that simply represent the number of seconds since that time (currently 1728717260 seconds since the Unix Epoch). With all these different timestamp formats, it's essential to have us tool Timestamp.run that can convert between them.</p>
+            <p>Unix Epoch is the starting point created as a universal reference. All Unix Timestamps, sometimes also referred to as Unix time or POSIX time, are an integer that simply represent the number of seconds since that time (currently 1728717260 seconds since Epoch time). With all these different timestamp formats, it's essential to have us tool Timestamp.run that can convert between them. </p>
           </div>
           
           <div className="bg-blue-100 p-6 rounded-lg">
@@ -82,8 +108,8 @@ const RealtimeConverter: React.FC = () => {
             <ol className="list-decimal list-inside space-y-2">
               <li>Etymology: "Epoch" derives from the Ancient Greek word "εhoxi" (epochē), meaning "pause" or "fixed point." It later entered Latin before becoming an English word.</li>
               <li>Use in Computer Science: In computer science and programming, "Epoch" typically refers to a specific reference point in time from which elapsed time is calculated.</li>
-              <li>Unix Epoch: The most common usage refers to the Unix Epoch, which is January 1, 1970, 00:00:00 UTC. This moment was chosen as the starting point for time in many computer systems.</li>
-              <li>Relationship with Timestamp: When we say "Epoch time" or simply "Epoch," we usually mean the number of seconds that have elapsed since the Unix Epoch. This is why it's often equated with a timestamp.</li>
+              <li>Unix Epoch: The most common usage refers to Epoch time, which is January 1, 1970, 00:00:00 UTC. This moment was chosen as the starting point for time in many computer systems.</li>
+              <li>Relationship with Timestamp: When we say "Epoch time" or simply "Epoch," we usually mean the number of seconds that have elapsed since Epoch time. This is why it's often equated with a timestamp.</li>
               <li>International Usage: This term is widely used in computer science and software development fields globally, not limited to any specific country.</li>
               <li>Usage in Other Fields: In other scientific domains such as astronomy and geology, "epoch" is also used to denote a significant reference point in time.</li>
             </ol>
@@ -96,42 +122,36 @@ const RealtimeConverter: React.FC = () => {
             </div>
             <ol className="list-none space-y-4">
               <li className="flex">
-                <span className="mr-2">1.</span>
                 <div>
                   <h3 className="inline">What is "Timestamp"?</h3>
                   <p>The term "timestamp" derives from rubber stamps used in offices to stamp the current date, and sometimes time, in ink on paper documents, to record when the document was received. Common examples of this type of timestamp are a postmark on a letter or the "in" and "out" times on a time card.</p>
                 </div>
               </li>
               <li className="flex">
-                <span className="mr-2">2.</span>
                 <div>
                   <h3 className="inline">What is "Unix Timestamp"?</h3>
-                  <p>Unix time is a date and time representation widely used in computing. It measures time by the number of non-leap seconds that have elapsed since 00:00:00 UTC on 1 January 1970, the Unix epoch. In modern computing, values are sometimes stored with higher granularity, such as microseconds or nanoseconds.</p>
+                  <p>Unix time is a date and time representation widely used in computing. It measures time by the number of non-leap seconds that have elapsed since 00:00:00 UTC on 1 January 1970, Epoch time. In modern computing, values are sometimes stored with higher granularity, such as microseconds or nanoseconds.</p>
                 </div>
               </li>
               <li className="flex">
-                <span className="mr-2">3.</span>
                 <div>
                   <h3 className="inline">What's the difference between Epoch Timestamp and Unix time?</h3>
                   <p>The terms Epoch Timestamp and Unix time are often used interchangeably, but there are some subtle differences: The Epoch Timestamp is a broader concept that can refer to any point in time chosen as the origin for a particular era. While it often refers to the same Unix epoch, it can technically be based on other starting points. Both Unix time and Epoch Timestamp are forms of timestamp representation. They can be converted to human-readable date time stamp formats using various tools and functions.</p>
                 </div>
               </li>
               <li className="flex">
-                <span className="mr-2">4.</span>
                 <div>
                   <h3 className="inline">What's "Unix Time"?</h3>
-                  <p>Unix time, also known as POSIX timestamp, is the number of seconds that have elapsed since the Unix epoch (January 1, 1970, at 00:00:00 UTC). It's widely used in computer systems and programming. Remember, whether you're working with Unix time or Epoch Timestamp, they provide a standardized way of representing time across different systems and time zones.</p>
+                  <p>Unix time, also known as POSIX timestamp, is the number of seconds that have elapsed since Epoch time (January 1, 1970, at 00:00:00 UTC). It's widely used in computer systems and programming. Remember, whether you're working with Unix time or Epoch Timestamp, they provide a standardized way of representing time across different systems and time zones.</p>
                 </div>
               </li>
               <li className="flex">
-                <span className="mr-2">5.</span>
                 <div>
                   <h3 className="inline">Which Timestamps Should You Use?</h3>
                   <p>Stored as 32- or 64-bit signed integers, POSIX timestamps have a limitation: they'll reach their maximum value on January 19, 2038, leading to an overflow issue.</p>
                 </div>
               </li>
               <li className="flex">
-                <span className="mr-2">6.</span>
                 <div>
                   <h3 className="inline">Why Unix timestamp is needed?</h3>
                   <p>Prefixing your Commands or Scripts with a Timestamp. Timestamp when function in script runs is needed. You can create a function that takes care of the timestamp and Change sheet name and range to suit, then call this function from your script function.</p>
