@@ -13,8 +13,9 @@ export default function Home() {
         <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <title>Timestamp Converter | Timestamp.run</title>
-        <meta name="description" content="Convert between timestamps and dates, and view real-time timestamps. Supports multiple time zones and detailed date inputs." />
+        <link rel="canonical" href="https://timestamp.run/" />
+        <title>Unix timestamp to date converter free online</title>
+        <meta name="description" content="Epoch and unix timestamp converter free. Date and time function timestamp for various programming languages. Use it now." />
       </Head>
       <h1 className="text-3xl font-bold mb-6">Unix timestamp to date and datetime to timestamp Converter</h1>
       <h2 className="text-xl font-semibold mb-4">Free unix timestamp and epoch time to date tool. Supports Epoch unix time in seconds and minutes.</h2>

@@ -26,10 +26,10 @@ function NavBar() {
     <nav className="bg-white shadow-md">
       <div className="container mx-auto px-6 py-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
+          <Link href="https://timestamp.run/" className="flex items-center">
             <img src="/icon/favicon-32x32.png" alt="Timestamp.run icon" className="h-6 w-6 mr-2" />
             <span className="text-xl font-semibold">Timestamp.run</span>
-          </div>
+          </Link>
           <div className="flex items-center space-x-4">
             <div className="flex items-center">
               <Globe size={20} className="text-gray-500 mr-2" />

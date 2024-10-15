@@ -7,6 +7,7 @@ export default function DetailedDateToTimestampConverter() {
       <Head>
         <title>Detailed Date to Timestamp Converter | Timestamp.run</title>
         <meta name="description" content="Convert detailed date and time to Unix timestamps with future date calculations. Ideal for precise time-based operations and planning." />
+        <link rel="canonical" href="https://timestamp.run/detailed-date-to-timestamp" />
       </Head>
       <h1 className="text-3xl font-bold mb-6">Detailed Date to Timestamp Converter</h1>
       <DetailedDateToTimestampConverterComponent />

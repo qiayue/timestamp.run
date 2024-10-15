@@ -6,8 +6,9 @@ const RealtimeConverter: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto">
       <Helmet>
-        <title>How to use Timestamp.run - Free Online Timestamp Converter</title>
-        <meta name="description" content="Learn how to use Timestamp.run for timestamp conversion. Supports various time formats including human-readable time, Unix timestamps, and ISO time strings." />
+        <title>Unix timestamp to date converter free online</title>
+        <meta name="description" content="Epoch and unix timestamp converter free. Date and time function timestamp for various programming languages. Use it now." />
+        <link rel="canonical" href="https://timestamp.run/" />
       </Helmet>
       
       <div className="flex items-center justify-center mb-6">
@@ -64,13 +65,13 @@ const RealtimeConverter: React.FC = () => {
               <FaLightbulb className="text-2xl mr-3 text-blue-500" />
               <h2 className="text-2xl font-bold">Tips for Timestamp.run</h2>
             </div>
-            <ol className="list-decimal list-inside space-y-2">
-              <li>You can convert unix timestamp to date, unix time to date, get the date from unix timestamp, convert epoch time to date, and even epoch to date, linux timestamp to date, or unix epoch to date.</li>
-              <li>Current time: You can get the current timestamp, now timestamp, or timestamp today using system functions. The current time unix or current unix timestamp gives you the current time in Unix format.</li>
-              <li>Database usage: In databases like PostgreSQL, you might work with postgresql timestamp or psql timestamp data types.</li>
-              <li>Terms like unix stamp, epoch unix time, epoch unix timestamp, and unix timestamp essentially refer to the same concept.</li>
-              <li>Timestamp convert or converting timestamp to date involves mathematical operations to transform the seconds elapsed to a readable date format.</li>
-            </ol>
+            <div className="space-y-2">
+              <h3>You can convert unix timestamp to date, unix time to date, get the date from unix timestamp, convert epoch time to date, and even epoch to date, linux timestamp to date, or unix epoch to date.</h3>
+              <h3>Current time: You can get the current timestamp, now timestamp, or timestamp today using system functions. The current time unix or current unix timestamp gives you the current time in Unix format.</h3>
+              <h3>Database usage: In databases like PostgreSQL, you might work with postgresql timestamp or psql timestamp data types.</h3>
+              <h3>Terms like unix stamp, epoch unix time, epoch unix timestamp, and unix timestamp essentially refer to the same concept.</h3>
+              <h3>Timestamp convert or converting timestamp to date involves mathematical operations to transform the seconds elapsed to a readable date format.</h3>
+            </div>
           </div>
           
           <div className="bg-blue-100 p-6 rounded-lg">
@@ -93,30 +94,48 @@ const RealtimeConverter: React.FC = () => {
               <FaQuestionCircle className="text-4xl mr-3 text-blue-500" />
               <h2 className="text-3xl font-bold">FAQs about Timestamp.run</h2>
             </div>
-            <ol className="list-decimal list-inside space-y-4">
-              <li>
-                <strong>What is "Timestamp"?</strong>
-                <p>The term "timestamp" derives from rubber stamps used in offices to stamp the current date, and sometimes time, in ink on paper documents, to record when the document was received. Common examples of this type of timestamp are a postmark on a letter or the "in" and "out" times on a time card.</p>
+            <ol className="list-none space-y-4">
+              <li className="flex">
+                <span className="mr-2">1.</span>
+                <div>
+                  <h3 className="inline">What is "Timestamp"?</h3>
+                  <p>The term "timestamp" derives from rubber stamps used in offices to stamp the current date, and sometimes time, in ink on paper documents, to record when the document was received. Common examples of this type of timestamp are a postmark on a letter or the "in" and "out" times on a time card.</p>
+                </div>
               </li>
-              <li>
-                <strong>What is "Unix Timestamp"?</strong>
-                <p>Unix time is a date and time representation widely used in computing. It measures time by the number of non-leap seconds that have elapsed since 00:00:00 UTC on 1 January 1970, the Unix epoch. In modern computing, values are sometimes stored with higher granularity, such as microseconds or nanoseconds.</p>
+              <li className="flex">
+                <span className="mr-2">2.</span>
+                <div>
+                  <h3 className="inline">What is "Unix Timestamp"?</h3>
+                  <p>Unix time is a date and time representation widely used in computing. It measures time by the number of non-leap seconds that have elapsed since 00:00:00 UTC on 1 January 1970, the Unix epoch. In modern computing, values are sometimes stored with higher granularity, such as microseconds or nanoseconds.</p>
+                </div>
               </li>
-              <li>
-                <strong>What's the difference between Epoch Timestamp and Unix time?</strong>
-                <p>The terms Epoch Timestamp and Unix time are often used interchangeably, but there are some subtle differences: The Epoch Timestamp is a broader concept that can refer to any point in time chosen as the origin for a particular era. While it often refers to the same Unix epoch, it can technically be based on other starting points. Both Unix time and Epoch Timestamp are forms of timestamp representation. They can be converted to human-readable date time stamp formats using various tools and functions.</p>
+              <li className="flex">
+                <span className="mr-2">3.</span>
+                <div>
+                  <h3 className="inline">What's the difference between Epoch Timestamp and Unix time?</h3>
+                  <p>The terms Epoch Timestamp and Unix time are often used interchangeably, but there are some subtle differences: The Epoch Timestamp is a broader concept that can refer to any point in time chosen as the origin for a particular era. While it often refers to the same Unix epoch, it can technically be based on other starting points. Both Unix time and Epoch Timestamp are forms of timestamp representation. They can be converted to human-readable date time stamp formats using various tools and functions.</p>
+                </div>
               </li>
-              <li>
-                <strong>What's "Unix Time"?</strong>
-                <p>Unix time, also known as POSIX timestamp, is the number of seconds that have elapsed since the Unix epoch (January 1, 1970, at 00:00:00 UTC). It's widely used in computer systems and programming. Remember, whether you're working with Unix time or Epoch Timestamp, they provide a standardized way of representing time across different systems and time zones.</p>
+              <li className="flex">
+                <span className="mr-2">4.</span>
+                <div>
+                  <h3 className="inline">What's "Unix Time"?</h3>
+                  <p>Unix time, also known as POSIX timestamp, is the number of seconds that have elapsed since the Unix epoch (January 1, 1970, at 00:00:00 UTC). It's widely used in computer systems and programming. Remember, whether you're working with Unix time or Epoch Timestamp, they provide a standardized way of representing time across different systems and time zones.</p>
+                </div>
               </li>
-              <li>
-                <strong>Which Timestamps Should You Use?</strong>
-                <p>Stored as 32- or 64-bit signed integers, POSIX timestamps have a limitation: they'll reach their maximum value on January 19, 2038, leading to an overflow issue.</p>
+              <li className="flex">
+                <span className="mr-2">5.</span>
+                <div>
+                  <h3 className="inline">Which Timestamps Should You Use?</h3>
+                  <p>Stored as 32- or 64-bit signed integers, POSIX timestamps have a limitation: they'll reach their maximum value on January 19, 2038, leading to an overflow issue.</p>
+                </div>
               </li>
-              <li>
-                <strong>Why Unix timestamp is needed?</strong>
-                <p>Prefixing your Commands or Scripts with a Timestamp. Timestamp when function in script runs is needed. You can create a function that takes care of the timestamp and Change sheet name and range to suit, then call this function from your script function.</p>
+              <li className="flex">
+                <span className="mr-2">6.</span>
+                <div>
+                  <h3 className="inline">Why Unix timestamp is needed?</h3>
+                  <p>Prefixing your Commands or Scripts with a Timestamp. Timestamp when function in script runs is needed. You can create a function that takes care of the timestamp and Change sheet name and range to suit, then call this function from your script function.</p>
+                </div>
               </li>
             </ol>
           </section>
@@ -128,7 +147,6 @@ const RealtimeConverter: React.FC = () => {
             </a>
           </section>
 
-          <script defer data-domain="timestamp.run" src="https://click.pageview.click/js/script.js"></script>
         </div>
       </section>
 

@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { useTimeZone } from '../contexts/TimeZoneContext'
 
 const DetailedDateToTimestampConverter: React.FC = () => {
+  const { timeZone: currentTimeZone } = useTimeZone()
+  const now = new Date()
   const [date, setDate] = useState({
-    year: new Date().getFullYear(),
-    month: 1,
-    day: 1,
-    hour: 0,
-    minute: 0,
-    second: 0
+    year: now.getFullYear(),
+    month: now.getMonth() + 1,
+    day: now.getDate(),
+    hour: now.getHours(),
+    minute: now.getMinutes(),
+    second: now.getSeconds()
   })
   const [timestamp, setTimestamp] = useState<number | null>(null)
   const [futureDates, setFutureDates] = useState<{ [key: string]: number }>({})

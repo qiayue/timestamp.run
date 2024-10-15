@@ -8,6 +8,7 @@ const DateToTimestampConverter: React.FC = () => {
       <Helmet>
         <title>Date to Timestamp Converter | Timestamp.run</title>
         <meta name="description" content="Convert dates to Unix timestamps. Perfect for developers working with time-based data and calculations." />
+        <link rel="canonical" href="https://timestamp.run/date-to-timestamp" />
       </Helmet>
       <h1 className="text-3xl font-bold mb-6">Date to Timestamp Converter</h1>
       <DateToTimestampConverterComponent />
