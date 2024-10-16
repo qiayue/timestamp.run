@@ -2,9 +2,9 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import { Clock } from 'lucide-react'
 import RealtimeConverter from './components/RealtimeConverter'
-import TimestampToDateConverter from './pages/TimestampToDateConverter'
-import DateToTimestampConverter from './pages/DateToTimestampConverter'
-import DetailedDateToTimestampConverter from './pages/DetailedDateToTimestampConverter'
+import TimestampToDateConverter from './components/TimestampToDateConverter'
+import DateToTimestampConverter from './components/DateToTimestampConverter'
+import DetailedDateToTimestampConverter from './components/DetailedDateToTimestampConverter'
 import { TimeZoneProvider } from './contexts/TimeZoneContext'
 
 function App() {
