@@ -2,9 +2,9 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import { Clock } from 'lucide-react'
 import RealtimeConverter from './components/RealtimeConverter'
-import TimestampToDateConverter from './pages/TimestampToDateConverter'
-import DateToTimestampConverter from './pages/DateToTimestampConverter'
-import DetailedDateToTimestampConverter from './pages/DetailedDateToTimestampConverter'
+import TimestampToDateConverter from './components/TimestampToDateConverter'
+import DateToTimestampConverter from './components/DateToTimestampConverter'
+import DetailedDateToTimestampConverter from './components/DetailedDateToTimestampConverter'
 import { TimeZoneProvider } from './contexts/TimeZoneContext'
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
                   <Link to="/" className="text-gray-700 hover:text-blue-500">Realtime</Link>
                   <Link to="/timestamp-to-date" className="text-gray-700 hover:text-blue-500">Timestamp to Date</Link>
                   <Link to="/date-to-timestamp" className="text-gray-700 hover:text-blue-500">Date to Timestamp</Link>
-                  <Link to="/detailed-date-to-timestamp" className="text-gray-700 hover:text-blue-500">Detailed Date to Timestamp</Link>
+                  <Link to="/detailed-date-to-timestamp" className="text-gray-700 hover:text-blue-500">Epoch Converter</Link>
                 </div>
               </div>
             </div>

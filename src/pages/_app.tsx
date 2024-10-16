@@ -48,7 +48,7 @@ function NavBar() {
             <Link href="/" className="text-gray-700 hover:text-blue-500">Realtime</Link>
             <Link href="/timestamp-to-date" className="text-gray-700 hover:text-blue-500">Timestamp to Date</Link>
             <Link href="/date-to-timestamp" className="text-gray-700 hover:text-blue-500">Date to Timestamp</Link>
-            <Link href="/detailed-date-to-timestamp" className="text-gray-700 hover:text-blue-500">Detailed Date to Timestamp</Link>
+            <Link href="/detailed-date-to-timestamp" className="text-gray-700 hover:text-blue-500">Epoch Converter</Link>
           </div>
         </div>
       </div>
