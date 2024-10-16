@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTimeZone } from '../contexts/TimeZoneContext'
+import moment from 'moment-timezone'  // 导入 moment-timezone
 
 const DetailedDateToTimestampConverter: React.FC = () => {
   const { timeZone } = useTimeZone()
@@ -21,50 +22,19 @@ const DetailedDateToTimestampConverter: React.FC = () => {
 
   const convertToTimestamp = () => {
     const { year, month, day, hour, minute, second } = date
-    const inputDate = new Date(year, month - 1, day, hour, minute, second)
-
-    if (isNaN(inputDate.getTime())) {
-      setTimestamp(null)
-      setFutureDates({})
-      return
-    }
-
-    // 获取时区偏移（分钟）
-    const formatter = new Intl.DateTimeFormat('en-US', {
-      timeZone,
-      timeZoneName: 'short'
-    })
-    const tzMatch = formatter.format(inputDate).match(/\s([A-Z]+)$/)
-    const tzAbbr = tzMatch ? tzMatch[1] : ''
-    const tzOffset = getTimezoneOffset(tzAbbr, inputDate)
-
-    // 计算 UTC 时间
-    const utcTime = inputDate.getTime() + tzOffset * 60 * 1000
-    const currentTimestamp = Math.floor(utcTime / 1000)
-
-    setTimestamp(currentTimestamp)
-    calculateFutureDates(currentTimestamp)
-  }
-
-  const getTimezoneOffset = (tzAbbr: string, date: Date): number => {
-    const tzOffsets: { [key: string]: number } = {
-      'PDT': 420,
-      'PST': 480,
-      // 添加其他时区缩写和偏移量
-    }
-    return tzOffsets[tzAbbr] || 0
+    const dateString = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}T${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`
+    
+    const timestamp = moment.tz(dateString, timeZone).valueOf() / 1000
+    
+    setTimestamp(Math.floor(timestamp))
+    calculateFutureDates(Math.floor(timestamp))
   }
 
   const calculateFutureDates = (currentTimestamp: number) => {
-    // 计算未来时间戳
-    const future100Days = new Date(currentTimestamp * 1000 + 100 * 24 * 60 * 60 * 1000)
-    const future200Days = new Date(currentTimestamp * 1000 + 200 * 24 * 60 * 60 * 1000)
-    const future365Days = new Date(currentTimestamp * 1000 + 365 * 24 * 60 * 60 * 1000)
-
     setFutureDates({
-      '100 days later': Math.floor(future100Days.getTime() / 1000),
-      '200 days later': Math.floor(future200Days.getTime() / 1000),
-      '365 days later': Math.floor(future365Days.getTime() / 1000)
+      '100 days later': moment.unix(currentTimestamp).add(100, 'days').unix(),
+      '200 days later': moment.unix(currentTimestamp).add(200, 'days').unix(),
+      '365 days later': moment.unix(currentTimestamp).add(365, 'days').unix()
     })
   }
 
