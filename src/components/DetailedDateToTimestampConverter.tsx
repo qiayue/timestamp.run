@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useTimeZone } from '../contexts/TimeZoneContext'
 
 const DetailedDateToTimestampConverter: React.FC = () => {
-  const { timeZone: currentTimeZone } = useTimeZone()
+  const { timeZone } = useTimeZone()
   const now = new Date()
   const [date, setDate] = useState({
     year: now.getFullYear(),
@@ -14,7 +14,6 @@ const DetailedDateToTimestampConverter: React.FC = () => {
   })
   const [timestamp, setTimestamp] = useState<number | null>(null)
   const [futureDates, setFutureDates] = useState<{ [key: string]: number }>({})
-  const { timeZone } = useTimeZone()
 
   useEffect(() => {
     convertToTimestamp()
@@ -22,15 +21,38 @@ const DetailedDateToTimestampConverter: React.FC = () => {
 
   const convertToTimestamp = () => {
     const { year, month, day, hour, minute, second } = date
-    const inputDate = new Date(Date.UTC(year, month - 1, day, hour, minute, second))
+    const inputDate = new Date(year, month - 1, day, hour, minute, second)
+
     if (isNaN(inputDate.getTime())) {
       setTimestamp(null)
       setFutureDates({})
       return
     }
-    const currentTimestamp = Math.floor(inputDate.getTime() / 1000)
+
+    // 获取时区偏移（分钟）
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      timeZoneName: 'short'
+    })
+    const tzMatch = formatter.format(inputDate).match(/\s([A-Z]+)$/)
+    const tzAbbr = tzMatch ? tzMatch[1] : ''
+    const tzOffset = getTimezoneOffset(tzAbbr, inputDate)
+
+    // 计算 UTC 时间
+    const utcTime = inputDate.getTime() + tzOffset * 60 * 1000
+    const currentTimestamp = Math.floor(utcTime / 1000)
+
     setTimestamp(currentTimestamp)
     calculateFutureDates(currentTimestamp)
+  }
+
+  const getTimezoneOffset = (tzAbbr: string, date: Date): number => {
+    const tzOffsets: { [key: string]: number } = {
+      'PDT': 420,
+      'PST': 480,
+      // 添加其他时区缩写和偏移量
+    }
+    return tzOffsets[tzAbbr] || 0
   }
 
   const calculateFutureDates = (currentTimestamp: number) => {
