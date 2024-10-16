@@ -23,7 +23,7 @@ function App() {
                   <Link to="/" className="text-gray-700 hover:text-blue-500">Realtime</Link>
                   <Link to="/timestamp-to-date" className="text-gray-700 hover:text-blue-500">Timestamp to Date</Link>
                   <Link to="/date-to-timestamp" className="text-gray-700 hover:text-blue-500">Date to Timestamp</Link>
-                  <Link to="/detailed-date-to-timestamp" className="text-gray-700 hover:text-blue-500">Detailed Date to Timestamp</Link>
+                  <Link to="/detailed-date-to-timestamp" className="text-gray-700 hover:text-blue-500">Epoch Converter</Link>
                 </div>
               </div>
             </div>

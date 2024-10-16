@@ -41,49 +41,73 @@ const DetailedDateToTimestampConverter: React.FC = () => {
   return (
     <div className="mt-6 p-4 bg-gray-100 rounded-lg">
       <h3 className="text-2xl font-semibold mb-2">Unix timestamp and epoch to date</h3>
-      <div className="grid grid-cols-3 gap-2 mb-2">
-        <input
-          type="number"
-          value={date.year}
-          onChange={(e) => setDate({ ...date, year: parseInt(e.target.value) })}
-          placeholder="Year"
-          className="p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          value={date.month}
-          onChange={(e) => setDate({ ...date, month: parseInt(e.target.value) })}
-          placeholder="Month (1-12)"
-          className="p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          value={date.day}
-          onChange={(e) => setDate({ ...date, day: parseInt(e.target.value) })}
-          placeholder="Day (1-31)"
-          className="p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          value={date.hour}
-          onChange={(e) => setDate({ ...date, hour: parseInt(e.target.value) })}
-          placeholder="Hour (0-23)"
-          className="p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          value={date.minute}
-          onChange={(e) => setDate({ ...date, minute: parseInt(e.target.value) })}
-          placeholder="Minute (0-59)"
-          className="p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          value={date.second}
-          onChange={(e) => setDate({ ...date, second: parseInt(e.target.value) })}
-          placeholder="Second (0-59)"
-          className="p-2 border border-gray-300 rounded"
-        />
+      <div className="grid grid-cols-3 gap-4 mb-2">
+        <div className="flex items-center">
+          <label htmlFor="year" className="mr-2 text-sm font-medium text-gray-700 w-12">Year:</label>
+          <input
+            id="year"
+            type="number"
+            value={date.year}
+            onChange={(e) => setDate({ ...date, year: parseInt(e.target.value) })}
+            placeholder="YYYY"
+            className="flex-grow p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div className="flex items-center">
+          <label htmlFor="month" className="mr-2 text-sm font-medium text-gray-700 w-14">Month:</label>
+          <input
+            id="month"
+            type="number"
+            value={date.month}
+            onChange={(e) => setDate({ ...date, month: parseInt(e.target.value) })}
+            placeholder="1-12"
+            className="flex-grow p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div className="flex items-center">
+          <label htmlFor="day" className="mr-2 text-sm font-medium text-gray-700 w-10">Day:</label>
+          <input
+            id="day"
+            type="number"
+            value={date.day}
+            onChange={(e) => setDate({ ...date, day: parseInt(e.target.value) })}
+            placeholder="1-31"
+            className="flex-grow p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div className="flex items-center">
+          <label htmlFor="hour" className="mr-2 text-sm font-medium text-gray-700 w-12">Hour:</label>
+          <input
+            id="hour"
+            type="number"
+            value={date.hour}
+            onChange={(e) => setDate({ ...date, hour: parseInt(e.target.value) })}
+            placeholder="0-23"
+            className="flex-grow p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div className="flex items-center">
+          <label htmlFor="minute" className="mr-2 text-sm font-medium text-gray-700 w-12">Minute:</label>
+          <input
+            id="minute"
+            type="number"
+            value={date.minute}
+            onChange={(e) => setDate({ ...date, minute: parseInt(e.target.value) })}
+            placeholder="0-59"
+            className="flex-grow p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div className="flex items-center">
+          <label htmlFor="second" className="mr-2 text-sm font-medium text-gray-700 w-12">Second:</label>
+          <input
+            id="second"
+            type="number"
+            value={date.second}
+            onChange={(e) => setDate({ ...date, second: parseInt(e.target.value) })}
+            placeholder="0-59"
+            className="flex-grow p-2 border border-gray-300 rounded"
+          />
+        </div>
       </div>
       <div className="mb-2 text-sm text-gray-600">
         Time Zone: {timeZone} (All inputs are treated as {timeZone})
