@@ -1,40 +1,28 @@
-import React, { useState, useEffect } from 'react'
-import { useTimeZone } from '../contexts/TimeZoneContext'
-import moment from 'moment-timezone' // 导入 moment-timezone
+'use client'
 
-// 日期转时间戳转换器组件
-const DateToTimestampConverter: React.FC = () => {
-  // 状态hooks
-  const [date, setDate] = useState('') // 日期输入
-  const [timestamp, setTimestamp] = useState<number | null>(null) // 转换后的时间戳
-  const { timeZone } = useTimeZone() // 从上下文获取时区
+import { useMemo, useState } from 'react'
+import { useTimeZone } from '@/contexts/TimeZoneContext'
+import { formatTimestamp, parseDateInTimeZone } from '@/utils/datetime'
 
+export default function DateToTimestampConverter() {
+  const [date, setDate] = useState('')
+  const { timeZone } = useTimeZone()
 
-  // 当时区变化时重新计算时间戳
-  useEffect(() => {
-    if (date) {
-      convertToTimestamp()
-    }
-  }, [timeZone, date])
-
-  // 转换日期为时间戳的函数
-  const convertToTimestamp = () => {
-    if (!date) {
-      setTimestamp(null)
-      return
+  // Recomputed whenever the input or the selected time zone changes: the same
+  // wall-clock time maps to a different instant in each zone.
+  const { timestamp, error } = useMemo(() => {
+    if (!date.trim()) {
+      return { timestamp: null, error: null }
     }
 
-    const timestampInTimeZone = moment.tz(date, timeZone).valueOf()
-    const timestampInSeconds = Math.floor(timestampInTimeZone / 1000)
-    setTimestamp(timestampInSeconds)
-  }
+    const parsed = parseDateInTimeZone(date, timeZone)
+    if (parsed === null) {
+      return { timestamp: null, error: 'Enter a date as YYYY-MM-DD HH:mm:ss' }
+    }
 
-  // 格式化日期时间的函数
-  const formatDate = (inputTimestamp: number): string => {
-    return moment.tz(inputTimestamp * 1000, timeZone).format('YYYY-MM-DD HH:mm:ss')
-  }
+    return { timestamp: parsed, error: null }
+  }, [date, timeZone])
 
-  // 组件渲染
   return (
     <div className="mt-6 p-4 bg-gray-100 rounded-lg">
       <h2 className="text-2xl font-semibold mb-2">Date to Timestamp Converter</h2>
@@ -42,29 +30,38 @@ const DateToTimestampConverter: React.FC = () => {
         <div className="bg-gray-200 p-2 text-sm text-gray-600 border-r border-gray-300">
           {timeZone}
         </div>
+        <label htmlFor="date-input" className="sr-only">
+          Date
+        </label>
         <input
+          id="date-input"
           type="text"
           value={date}
-          onChange={(e) => setDate(e.target.value)}
+          onChange={(event) => setDate(event.target.value)}
           placeholder="Enter date (YYYY-MM-DD HH:mm:ss)"
-          className="flex-grow p-2"
+          className="grow p-2"
         />
       </div>
       <button
-        onClick={convertToTimestamp}
+        type="button"
+        onClick={() => setDate((current) => current.trim())}
         className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors mb-2"
       >
         Convert to Timestamp
       </button>
+      {error && (
+        <p className="mb-2 text-red-600" role="alert">
+          {error}
+        </p>
+      )}
       {timestamp !== null && (
         <div className="bg-white p-2 rounded">
           <strong>Converted Timestamp:</strong> {timestamp}
           <br />
-          <strong>Formatted Date and Time:</strong> {formatDate(timestamp)}
+          <strong>Formatted Date and Time:</strong>{' '}
+          {formatTimestamp(timestamp, timeZone)}
         </div>
       )}
     </div>
   )
 }
-
-export default DateToTimestampConverter

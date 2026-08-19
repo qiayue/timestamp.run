@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
-import { Helmet } from 'react-helmet'
+'use client'
+
+import { useState } from 'react'
+import Link from 'next/link'
 import { FaRegClock, FaCalendarAlt, FaExchangeAlt, FaInfoCircle, FaLightbulb, FaHistory, FaQuestionCircle, FaChevronDown, FaChevronUp } from 'react-icons/fa'
 
-const RealtimeConverter: React.FC = () => {
+export default function RealtimeConverter() {
   const [openQuestions, setOpenQuestions] = useState<number[]>([])
 
   const toggleQuestion = (index: number) => {
@@ -42,12 +44,6 @@ const RealtimeConverter: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <Helmet>
-        <title>Unix timestamp to date converter free online</title>
-        <meta name="description" content="Epoch and unix timestamp converter free. Date and time function timestamp for various programming languages. Use it now." />
-        <link rel="canonical" href="https://timestamp.run/" />
-      </Helmet>
-      
       <div className="flex items-center justify-center mb-6">
         <FaRegClock className="text-4xl mr-3 text-blue-500" />
         <h2 className="text-3xl font-bold">How to use Timestamp.run?</h2>
@@ -183,17 +179,13 @@ const RealtimeConverter: React.FC = () => {
 
           <section className="mt-12 text-center py-10 bg-blue-100 rounded-lg">
             <h2 className="text-3xl font-bold mb-6">Get to know your timestamp now</h2>
-            <a href="/" className="inline-block bg-blue-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300">
+            <Link href="/" className="inline-block bg-blue-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300">
               Get started
-            </a>
+            </Link>
           </section>
 
         </div>
       </section>
-
-      <script defer data-domain="timestamp.run" src="https://click.pageview.click/js/script.js"></script>
     </div>
   )
 }
-
-export default RealtimeConverter
