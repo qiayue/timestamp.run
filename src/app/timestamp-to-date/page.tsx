@@ -1,15 +1,16 @@
-import Head from 'next/head'
+import type { Metadata } from 'next'
 import TimestampToDateConverterComponent from '@/components/TimestampToDateConverter'
+
+export const metadata: Metadata = {
+  title: "Timestamp to Date Converter | Timestamp.run",
+  description: "Convert Unix timestamps to human-readable dates quickly and accurately. Ideal for developers, data analysts, and anyone involved in data processing.",
+  alternates: { canonical: "/timestamp-to-date" },
+}
+
 
 export default function TimestampToDateConverter() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <Head>
-        <title>Timestamp to Date Converter | Timestamp.run</title>
-        <meta name="description" content="Convert Unix timestamps to human-readable dates quickly and accurately. Ideal for developers, data analysts, and anyone involved in data processing." />
-        <link rel="canonical" href="https://timestamp.run/timestamp-to-date" />
-      </Head>
-      
       <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Timestamp to Date Converter</h1>
       <p className="text-xl text-center text-gray-600 mb-8">
         Convert timestamps to human-readable dates quickly and accurately with our online tool. 
@@ -231,13 +232,6 @@ export default function TimestampToDateConverter() {
           Our tool is quick, reliable, and user-friendly, making it the perfect choice for professionals and individuals alike.
         </p>
       </section>
-      <script defer data-domain="timestamp.run" src="https://click.pageview.click/js/script.js"></script>
     </div>
   )
-}
-
-export async function getServerSideProps() {
-  return {
-    props: {}, // Will be passed to the page component as props
-  }
 }

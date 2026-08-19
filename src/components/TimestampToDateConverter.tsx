@@ -1,81 +1,78 @@
-import React, { useState, useEffect } from 'react'
-import { useTimeZone } from '../contexts/TimeZoneContext'
-import { timeZones } from '../utils/timeZones'
+'use client'
 
-interface TimestampToDateConverterProps {
+import { useMemo, useState } from 'react'
+import { useTimeZone } from '@/contexts/TimeZoneContext'
+import { formatTimestamp } from '@/utils/datetime'
+import { timeZones } from '@/utils/timeZones'
+
+type TimestampToDateConverterProps = {
   initialTimestamp?: string
-  initialConvertedDates?: { [key: string]: string }
 }
 
-const TimestampToDateConverter: React.FC<TimestampToDateConverterProps> = ({
+export default function TimestampToDateConverter({
   initialTimestamp = '',
-  initialConvertedDates = {}
-}) => {
+}: TimestampToDateConverterProps) {
   const [timestamp, setTimestamp] = useState(initialTimestamp)
-  const [convertedDates, setConvertedDates] = useState<{ [key: string]: string }>(initialConvertedDates)
   const { timeZone } = useTimeZone()
 
-  useEffect(() => {
-    if (timestamp) {
-      convertTimestamp(timestamp)
-    }
-  }, [timeZone, timestamp])
-
-  const convertTimestamp = (inputTimestamp: string) => {
-    const parsedTimestamp = parseInt(inputTimestamp.trim())
-    if (isNaN(parsedTimestamp)) {
-      setConvertedDates({ error: 'Invalid timestamp' })
-      return
+  // Purely derived from the input and the selected zone, so it is computed
+  // during render rather than synced through an effect.
+  const { convertedDates, error } = useMemo(() => {
+    const trimmed = timestamp.trim()
+    if (!trimmed) {
+      return { convertedDates: {}, error: null }
     }
 
-    const date = new Date(parsedTimestamp * 1000)
-    const formattedDates = timeZones.reduce((acc, zone) => {
-      acc[zone] = formatDate(date, zone)
-      return acc
-    }, {} as { [key: string]: string })
-    setConvertedDates(formattedDates)
-  }
-
-  const formatDate = (date: Date, tz: string): string => {
-    const options: Intl.DateTimeFormatOptions = {
-      timeZone: tz,
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false
+    const parsed = Number(trimmed)
+    if (!Number.isFinite(parsed)) {
+      return { convertedDates: {}, error: 'Invalid timestamp' }
     }
-    return new Intl.DateTimeFormat('en-US', options).format(date).replace(/(\d+)\/(\d+)\/(\d+),\s/, '$3-$1-$2 ')
-  }
+
+    return {
+      convertedDates: Object.fromEntries(
+        timeZones.map((zone) => [zone, formatTimestamp(parsed, zone)]),
+      ),
+      error: null,
+    }
+  }, [timestamp])
 
   return (
     <div className="mt-6 p-4 bg-gray-100 rounded-lg">
       <h2 className="text-2xl font-semibold mb-2">Convert Epoch time to date</h2>
+      <label htmlFor="timestamp-input" className="sr-only">
+        Unix timestamp
+      </label>
       <input
+        id="timestamp-input"
         type="text"
+        inputMode="numeric"
         value={timestamp}
-        onChange={(e) => setTimestamp(e.target.value)}
+        onChange={(event) => setTimestamp(event.target.value)}
         placeholder="Enter Unix timestamp"
         className="w-full p-2 border border-gray-300 rounded mb-2"
       />
       <button
-        onClick={() => convertTimestamp(timestamp)}
+        type="button"
+        onClick={() => setTimestamp((current) => current.trim())}
         className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors mb-2"
       >
         Convert to Date
       </button>
+      {error && (
+        <p className="mb-2 text-red-600" role="alert">
+          {error}
+        </p>
+      )}
       {Object.keys(convertedDates).length > 0 && (
         <div className="bg-white p-4 rounded shadow-md">
           <h4 className="text-lg font-semibold mb-3">Conversion Results:</h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {Object.entries(convertedDates).map(([zone, date]) => (
-              <div 
-                key={zone} 
+              <div
+                key={zone}
                 className={`p-3 rounded-lg transition-colors ${
-                  zone === timeZone 
-                    ? 'bg-blue-100 border-2 border-blue-300' 
+                  zone === timeZone
+                    ? 'bg-blue-100 border-2 border-blue-300'
                     : 'bg-gray-50 hover:bg-gray-100'
                 }`}
               >
@@ -89,5 +86,3 @@ const TimestampToDateConverter: React.FC<TimestampToDateConverterProps> = ({
     </div>
   )
 }
-
-export default TimestampToDateConverter

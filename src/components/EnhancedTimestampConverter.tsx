@@ -1,13 +1,10 @@
-import React from 'react'
-import dynamic from 'next/dynamic'
-import TimestampToDateConverter from './TimestampToDateConverter'
 import DateToTimestampConverter from './DateToTimestampConverter'
 import DetailedDateToTimestampConverter from './DetailedDateToTimestampConverter'
+import LiveTimestampDisplay from './LiveTimestampDisplay'
 import RealtimeConverter from './RealtimeConverter'
+import TimestampToDateConverter from './TimestampToDateConverter'
 
-const LiveTimestampDisplay = dynamic(() => import('./LiveTimestampDisplay'), { ssr: false })
-
-const EnhancedTimestampConverter: React.FC = () => {
+export default function EnhancedTimestampConverter() {
   return (
     <div className="space-y-4">
       <LiveTimestampDisplay />
@@ -18,5 +15,3 @@ const EnhancedTimestampConverter: React.FC = () => {
     </div>
   )
 }
-
-export default EnhancedTimestampConverter

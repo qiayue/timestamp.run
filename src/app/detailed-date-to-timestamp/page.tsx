@@ -1,15 +1,16 @@
-import Head from 'next/head'
+import type { Metadata } from 'next'
 import DetailedDateToTimestampConverterComponent from '@/components/DetailedDateToTimestampConverter'
+
+export const metadata: Metadata = {
+  title: "Epoch Converter | Precise Date to Timestamp | Timestamp.run",
+  description: "Convert detailed dates to Unix timestamps with future calculations. Perfect for developers and time-based operations.",
+  alternates: { canonical: "/detailed-date-to-timestamp" },
+}
+
 
 export default function DetailedDateToTimestampConverter() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <Head>
-        <title>Epoch Converter | Precise Date to Timestamp | Timestamp.run</title>
-        <meta name="description" content="Convert detailed dates to Unix timestamps with future calculations. Perfect for developers and time-based operations." />
-        <link rel="canonical" href="https://timestamp.run/detailed-date-to-timestamp" />
-      </Head>
-      
       <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Welcome to the Epoch Converter</h1>
       <p className="text-xl text-center text-gray-600 mb-8">
         Efficiently convert Unix timestamps to human-readable dates and vice versa with our Epoch Converter. 
@@ -183,10 +184,4 @@ export default function DetailedDateToTimestampConverter() {
       </section>
     </div>
   )
-}
-
-export async function getServerSideProps() {
-  return {
-    props: {}, // 将会被传递给页面组件作为属性
-  }
 }
